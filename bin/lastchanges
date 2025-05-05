@@ -3,7 +3,7 @@
 # @package: lastchanges
 # @build_type: bin
 # @build_with: Mush 0.2.0 (2025-04-30 develop)
-# @build_date: 2025-05-05T12:47:11Z
+# @build_date: 2025-05-05T12:49:57Z
 set -e
 use() { return 0; }
 extern() { return 0; }
@@ -29,12 +29,12 @@ main() {
   # Check if the path is a directory
 
   root_index=0
-  root_count=$(find "${path}" -maxdepth 4 -type d | wc -l)
+  root_count=$(find "${path}" -maxdepth 4 -type d 2>/dev/null | wc -l)
 
   path_depth=$(echo "${path}" | awk -F'/' '{print NF-1}')
 
   rm -fr lastchanges.db
-  find "${path}" -type d | while IFS= read -r dir; do
+  find "${path}" -type d 2>/dev/null | while IFS= read -r dir; do
     [ "${dir}" = "${path}" ] && continue
     root_depth=$(echo "${dir}" | awk -F'/' '{print NF-1}')
     find "${dir}" -type f -exec stat -c '%Y %n' {} \; >> lastchanges.db 2>/dev/null || true
