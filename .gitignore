@@ -2,3 +2,5 @@
 .vscode/
 target/
 .env
+lastchanges.db
+lastchanges.db.tmp
