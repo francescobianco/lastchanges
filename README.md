@@ -1,21 +1,26 @@
 # lastchanges
 
+> lastchanges (recommended to be abbreviated as lc) lists the most recently modified files in the system, helping you track changes quickly.
+
 ## Installation
 
-1. Install MUSH
-   ```bash
-   curl get.javanile.org/mush | bash -
-   ```
+Install MUSH
 
-2. Install Matrix Theme:
-   ```bash
-   mush install lastchanges
-   ```
+```bash
+curl get.javanile.org/mush | bash -
+```
 
-3. Run to analyzie filesystem
-   ```bash
-   lastchanges /
-   ```
+Install lastchanges utility:
+
+```bash
+mush install lastchanges
+```
+
+Run to analyzie filesystem
+
+```bash
+lastchanges /
+```
 
 ## Usage of Android device
 
@@ -30,4 +35,3 @@ Run the script to explore the Download directory
 ```
 sh /sdcard/Download/lastchanges /sdcard/Download/
 ```
-
