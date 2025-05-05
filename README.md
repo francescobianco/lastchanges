@@ -4,13 +4,13 @@
 
 ## Installation
 
-Install MUSH
+Install [Mush](https://mush.javanile.org/) by Javanile
 
 ```bash
 curl get.javanile.org/mush | bash -
 ```
 
-Install lastchanges utility:
+Install `lastchanges` utility:
 
 ```bash
 mush install lastchanges
@@ -22,7 +22,7 @@ Run to analyzie filesystem
 lastchanges /
 ```
 
-## Usage of Android device
+## Usage on Android device
 
 Download the script 
 
