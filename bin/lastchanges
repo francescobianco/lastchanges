@@ -3,7 +3,7 @@
 # @package: lastchanges
 # @build_type: bin
 # @build_with: inject file VERSION
-# @build_date: 2025-05-05T19:10:31Z
+# @build_date: 2025-05-05T19:11:44Z
 set -e
 use() { return 0; }
 extern() { return 0; }
@@ -36,7 +36,7 @@ main() {
 
   rm -fr lastchanges.db
 
-  [ "$(uname)" = "Darwin" ]] && is_mac=yes
+  [ "$(uname)" = "Darwin" ] && is_mac=yes
 
   find "${path}" -type d 2>/dev/null | while IFS= read -r dir; do
     [ "${dir}" = "${path}" ] && continue

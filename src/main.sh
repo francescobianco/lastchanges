@@ -21,7 +21,7 @@ main() {
 
   rm -fr lastchanges.db
 
-  [ "$(uname)" = "Darwin" ]] && is_mac=yes
+  [ "$(uname)" = "Darwin" ] && is_mac=yes
 
   find "${path}" -type d 2>/dev/null | while IFS= read -r dir; do
     [ "${dir}" = "${path}" ] && continue
