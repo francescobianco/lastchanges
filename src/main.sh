@@ -19,10 +19,17 @@ main() {
   path_depth=$(echo "${path}" | awk -F'/' '{print NF-1}')
 
   rm -fr lastchanges.db
+
+  is_mac=yes
+
   find "${path}" -type d 2>/dev/null | while IFS= read -r dir; do
     [ "${dir}" = "${path}" ] && continue
     root_depth=$(echo "${dir}" | awk -F'/' '{print NF-1}')
-    find "${dir}" -type f -exec stat -c '%Y %n' {} \; >> lastchanges.db 2>/dev/null || true
+    if [ "${is_mac}" = "yes" ]; then
+      find "${dir}" -type f -exec stat -f '%m %N' {} \; >> lastchanges.db || true
+    else
+      find "${dir}" -type f -exec stat -c '%Y %n' {} \; >> lastchanges.db || true
+    fi
     root_delta=$((root_depth - path_depth))
     if [ "${root_delta}" -lt 5 ]; then
       root_index=$((root_index + 1))
