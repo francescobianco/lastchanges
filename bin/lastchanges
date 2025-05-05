@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# @BP010: Release metadata
+# @package: lastchanges
+# @build_type: bin
+# @build_with: Mush 0.2.0 (2025-04-30 develop)
+# @build_date: 2025-05-05T12:47:11Z
+set -e
+use() { return 0; }
+extern() { return 0; }
+legacy() { return 0; }
+module() { return 0; }
+public() { return 0; }
+embed() { return 0; }
+inject() { return 0; }
+## BP004: Compile the entrypoint
+
+main() {
+  local path
+  local root_depth
+  local path_depth
+  local root_index
+  local root_count
+  local progress
+
+  path=$(realpath "${1:-/}")
+
+  echo "Analyzing: ${path}"
+
+  # Check if the path is a directory
+
+  root_index=0
+  root_count=$(find "${path}" -maxdepth 4 -type d | wc -l)
+
+  path_depth=$(echo "${path}" | awk -F'/' '{print NF-1}')
+
+  rm -fr lastchanges.db
+  find "${path}" -type d | while IFS= read -r dir; do
+    [ "${dir}" = "${path}" ] && continue
+    root_depth=$(echo "${dir}" | awk -F'/' '{print NF-1}')
+    find "${dir}" -type f -exec stat -c '%Y %n' {} \; >> lastchanges.db 2>/dev/null || true
+    root_delta=$((root_depth - path_depth))
+    if [ "${root_delta}" -lt 5 ]; then
+      root_index=$((root_index + 1))
+      progress=$((root_index * 100 / root_count))
+      echo "${progress}% ${dir}"
+    fi
+  done
+
+  mv lastchanges.db lastchanges.db.tmp
+
+  sort -n lastchanges.db.tmp > lastchanges.db
+
+  rm -f lastchanges.db.tmp
+
+  echo "Analyzing complete."
+}
+## BP005: Execute the entrypoint
+main "$@"
