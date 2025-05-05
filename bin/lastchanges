@@ -3,7 +3,7 @@
 # @package: lastchanges
 # @build_type: bin
 # @build_with: inject file VERSION
-# @build_date: 2025-05-05T19:11:44Z
+# @build_date: 2025-05-05T19:11:46Z
 set -e
 use() { return 0; }
 extern() { return 0; }
