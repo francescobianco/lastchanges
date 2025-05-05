@@ -3,7 +3,7 @@
 # @package: lastchanges
 # @build_type: bin
 # @build_with: inject file VERSION
-# @build_date: 2025-05-05T19:09:11Z
+# @build_date: 2025-05-05T19:10:31Z
 set -e
 use() { return 0; }
 extern() { return 0; }
@@ -21,6 +21,7 @@ main() {
   local root_index
   local root_count
   local progress
+  local is_mac
 
   path=$(realpath "${1:-/}")
 
@@ -35,7 +36,7 @@ main() {
 
   rm -fr lastchanges.db
 
-  is_mac=yes
+  [ "$(uname)" = "Darwin" ]] && is_mac=yes
 
   find "${path}" -type d 2>/dev/null | while IFS= read -r dir; do
     [ "${dir}" = "${path}" ] && continue
